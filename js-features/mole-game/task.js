@@ -1,4 +1,5 @@
 
+
 const hitsWin = 10; // макс. количество попаданий
 const missesLose = 5; // макс. количество промахов
 const fieldHoles = 9; // поле 3х3
@@ -13,4 +14,5 @@ const gameContainer = document.getElementById('hole-game'); // Поле
 function getHole( index ) {
     
 }
+
 
