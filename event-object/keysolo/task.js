@@ -17,6 +17,10 @@ class Game {
   }
 
   registerEvents() {
+    console.log(this)
+    console.log(this.currentSymbol)
+    let symbolCurrent = document.getElementsByClassName('.symbol_current');
+    
     /*
       TODO:
       Написать обработчик события, который откликается
