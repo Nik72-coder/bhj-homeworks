@@ -12,7 +12,7 @@ const missesDisplay = document.getElementById('lost'); // Промахи
 const gameContainer = document.getElementById('hole-game'); // Поле
 
 function getHole( index ) {
-    
+    console.log(hits);
 }
 
 
