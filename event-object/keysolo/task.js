@@ -1,6 +1,7 @@
 class Game {
   constructor(container) {
     this.container = container;
+
     this.wordElement = container.querySelector('.word');
     this.winsElement = container.querySelector('.status__wins');
     this.lossElement = container.querySelector('.status__loss');
@@ -17,9 +18,39 @@ class Game {
   }
 
   registerEvents() {
-    let symbolCurrent = document.getElementsByClassName('.symbol_current');
-    console.log('symbolCurrent - ', symbolCurrent, typeof(symbolCurrent));
-    console.log(symbolCurrent.textContent)
+    let parentElement = document.querySelector('.symbolCurrent');
+    let symbolCurrent = document.querySelectorAll('.symbol');
+    let array = [];
+    symbolCurrent.forEach((item, index) => {
+      array.push(item);
+    });
+    let element = document.createElement('input');
+    document.body.insertBefore(element, parentElement);
+    element = element.focus();
+    element = document.querySelector('input');
+    let i = 0;
+    let j = 0;
+    let k = 0;
+    element.addEventListener('keydown', (event) => {
+      if(event.key === array[i].textContent) {
+        this.success;
+        j += 1;
+        if(j >= array.length) {
+          alert('Вы победили')
+        }
+      } else {
+        this.fail;
+        k += 1;
+        if(k >= 3) {
+          alert('Вы проиграли')
+        }
+      }
+      i += 1;
+    });
+    
+
+    
+
     /*
       TODO:
       Написать обработчик события, который откликается
