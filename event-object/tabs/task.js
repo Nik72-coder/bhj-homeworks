@@ -2,7 +2,11 @@
 let j = 0;
 
 let tab = document.querySelectorAll('.tab');
+
 let tab__content = document.querySelectorAll('.tab__content');
+
+
+
 tab.forEach((item, index) => {
     item.addEventListener('click', () => {
         if (item.classList.value !== 'tab tab_active') {
