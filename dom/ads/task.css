@@ -6,4 +6,6 @@
   display: inline;
 }
 
-
+.rotator__case_active [data-color] {
+  color: var(--element-color);
+}
