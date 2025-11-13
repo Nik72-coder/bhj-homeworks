@@ -21,17 +21,13 @@ class Game {
     let parentElement = document.querySelector('.symbolCurrent');
     let symbolCurrent = document.querySelectorAll('.symbol');
     let array = [];
-    symbolCurrent.forEach((item, index) => {
+    symbolCurrent.forEach((item) => {
       array.push(item);
     });
-    let element = document.createElement('input');
-    document.body.insertBefore(element, parentElement);
-    element = element.focus();
-    element = document.querySelector('input');
     let i = 0;
     let j = 0;
     let k = 0;
-    element.addEventListener('keydown', (event) => {
+    document.body.addEventListener('keydown', (event) => {
       if(event.key === array[i].textContent) {
         this.success;
         j += 1;
