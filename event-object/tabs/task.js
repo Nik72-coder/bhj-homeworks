@@ -32,6 +32,9 @@ tab.forEach((item, index) => {
             console.log(`array(${[index]}).classList.value - `, array[index].classList.value);
             array[index].classList.add('tab__content_active');
             console.log(`array(${[index]}).classList.value - `, array[index].classList.value);
+            item.classList.value = array[index].classList.value;
+            console.log(`${item}.classList.value - `, item.classList.value);
+            console.log(`tab(${0}).classList.value - `, tab[0].classList.value);
         };
         console.log('t - ', t);
     });
