@@ -4,6 +4,7 @@ let j = 0;
 let tab = document.querySelectorAll('.tab');
 
 let tab__content = document.querySelectorAll('.tab__content');
+console.log(tab)
 
 
 
