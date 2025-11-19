@@ -24,6 +24,7 @@ cartProducts = cartProducts[0];
 let cartProductObject = { name: 'товар', id: 1, src: '' }; // объект товара в корзине
 
 
+
 cartProductCount.textContent = 'Заказов нет';
 let cartProductObjectArray = []; // массив товаров(объектов) в корзине
 
