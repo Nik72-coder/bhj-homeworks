@@ -23,9 +23,17 @@ let cartProducts = document.getElementsByClassName('cart__products'); // доб�
 cartProducts = cartProducts[0];
 let cartProductObject = { name: 'товар', id: 1, src: '' }; // объект товара в корзине
 
+<<<<<<< HEAD
 cartProduct.textContent = 'Заказов нет';
 let cartProductObjectArray = []; // массив товаров(объектов) в корзине
 
+=======
+cartProduct.textContent = 0;
+let cartProductObjectArray = []; // массив товаров(объектов) в корзине
+
+cartProduct.remove();
+
+>>>>>>> f879f47b666eb846134a13b56bb260bd9903c56e
 
 for (let i = 0; i < minus.length; i++) {
     minus[i].addEventListener('click', () => {
@@ -44,7 +52,10 @@ for (let i = 0; i < plus.length; i++) {
 
 for (let i = 0; i < productAdd.length; i++) {
     productAdd[i].addEventListener('click', () => {
+<<<<<<< HEAD
         cartProduct.remove();
+=======
+>>>>>>> f879f47b666eb846134a13b56bb260bd9903c56e
         makeObject(i);
         makeDiv(i);
     });
