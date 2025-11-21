@@ -11,8 +11,8 @@ tooltip.forEach((item, index) => {
         item.appendChild(newDiv);
         item.addEventListener('mouseenter', () => {
             newDiv.style.display = 'block';
-            newDiv.style.left = event.clientX + 30 + 'px';
-            newDiv.style.top = event.clientY + 30 + 'px';
+            newDiv.style.left = event.clientX + 10 + 'px';
+            newDiv.style.top = event.clientY + 10 + 'px';
         });
         item.addEventListener('mouseleave', () => {
             newDiv.style.display = 'none';
