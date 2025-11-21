@@ -21,5 +21,10 @@
 }
 
 .tooltip_active {
-  display: block;
+  
+  position: absolute;
+  background: black;
+  padding: 5px;
+  border-radius: 5px;
+  color: #fff;
 }
