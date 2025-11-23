@@ -1,22 +1,21 @@
 
-let tooltip = document.querySelectorAll('.has-tooltip');
-let elementA = document.querySelectorAll('[title]');
-tooltip.forEach((item, index) => {
+let tooltip = document.querySelector('.tooltip');
+let link = document.querySelectorAll('.has-tooltip');
+link.forEach((item) => {
     item.addEventListener('click', (event) => {
         event.preventDefault();
-        let tooltipText = item.getAttribute('title');
-        let newDiv = document.createElement('div');
-        newDiv.className = 'tooltip_active';
-        newDiv.textContent = tooltipText;
-        item.appendChild(newDiv);
-        item.addEventListener('mouseenter', () => {
-            newDiv.style.display = 'block';
-            newDiv.style.left = event.clientX + 10 + 'px';
-            newDiv.style.top = event.clientY + 10 + 'px';
-        });
-        item.addEventListener('mouseleave', () => {
-            newDiv.style.display = 'none';
-        });
-    })
+        const tooltipText = event.target.getAttribute('title');
+        tooltip.textContent = tooltipText;
+        const cursorX = event.clientX;
+        const cursorY = event.clientY;
+        tooltip.style.left = `${cursorX}px`;
+        tooltip.style.top = `${cursorY}px`;
+        tooltip.style.transform = 'translate(15px, 15px)';
+        tooltip.classList.add('tooltip_active');
+    });
 });
-
+document.addEventListener('click', (event) => {
+    if (event.target.classList.value !== 'has-tooltip') {
+        tooltip.classList.remove('tooltip_active');
+    };
+});
