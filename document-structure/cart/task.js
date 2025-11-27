@@ -29,8 +29,8 @@ let cartProducts = document.getElementsByClassName('cart__products'); // доб�
 cartProducts = cartProducts[0];
 // let cartProductObject = { name: 'товар', id: 1, src: '', count: 1 }; // объект товара в корзине
 
-cartProduct.textContent = 'Корзина пуста';
 let cartProductObjectArray = []; // массив товаров(объектов) в корзине
+cartProduct.textContent = 'Корзина пуста';
 
 for (let i = 0; i < minus.length; i++) {
     minus[i].addEventListener('click', () => {
