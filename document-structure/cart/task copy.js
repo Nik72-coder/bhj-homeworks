@@ -18,11 +18,12 @@ cartProducts = cartProducts[0];
 
 
 let cart = document.querySelector('.cart'); // Корзина с товарами
-console.log(cart)
+
 
 let cartElementCount = cart.querySelector('.cart__product-count');
 let cartProductArray = []; // массив товаров в корзине
-cartProduct.textContent = 'Корзина пуста';
+cartProductArray.push(cartProduct);
+cartProductCount.textContent = 'Корзина пуста';
 
 for (let i = 0; i < minus.length; i++) {
     minus[i].addEventListener('click', () => {
@@ -37,39 +38,43 @@ for (let i = 0; i < plus.length; i++) {
         productQuantityValue[i].textContent = Number(productQuantityValue[i].textContent) + 1;
     });
 };
-let foundItem = 0;
+let foundItem = 0;  // Переменная для определения, есть ли уже в корзине кликнутый товар
 for (let i = 0; i < productAdd.length; i++) {
-    cartProduct.textContent = '';
+
     productAdd[i].addEventListener('click', () => {
+        let product = productAdd[i].closest('.product'); // Нашел кликнутый товар
+        let productId = product.dataset.id; // Получил id кликнутого товара
+        
+            for (let j = 0; j < cartProductArray.length; j++) { // цикл для поиска кликнутого товара в корзине
+                console.log(productId);  // контролирую кликнутый товар
+                console.log(cartProductArray[j].dataset.id); // контролирую опрашиваемый товар в корзине при переборе
+                console.log(cartProductArray);  // контролирую состав корзины, включен ли предыдущий кликнутый товар в корзину
+                console.log(productId === cartProductArray[j].dataset.id); // контролирую условие в следующей строке
+                if (productId === cartProductArray[j].dataset.id) { // проверка наличия по id кликнутого товара в корзине
+                    console.log('j - ', j) // контролирую процесс перебора
+                    foundItem += 1; // в случае, если в корзине уже есть товар, foundItem становится равным 1, он может принимать значения 0 или 1
+                };
+            };
+            console.log('foundItem - ', foundItem);  // контролирую правильность определения программой наличия товара в корзине
+            if (foundItem === 0) { // если товара в корзине нет,
+                makeDiv(i);   // то он помещается в корзину,
+                cartProductArray.push(product);  // и включается в массив корзины
+            } else {
+                foundItem = 0;
+                cartProductCount.textContent = productQuantityValue[i].textContent; // иначе меняется только количество товара
 
-        let product = productAdd[i].closest('.product');
-
-        let productId = product.dataset.id;
-        if (cartProductArray.length === 0) {
-            cartProductArray.push(product);
-            makeDiv(i);
-        } else {
-
-            for (let j = 0; j < cartProductArray.length; j++) {
-
-                if (productId === cartProductArray[j].dataset.id) {
-                    foundItem = 0;
-
-                    foundItem += 1;
-
-                }
-                if (foundItem !== 0) {
-                    cartElementCount.textContent = productQuantityValue.textContent;
-                } else {
-                    cartProductArray.push(product);
-
-                }
             }
-            makeDiv(i);
-        }
+        
 
-    })
+    }
+    )
+
+    // cartProductArray.push(product);  // Если корзина пуста заношу в нее кликнутый товар
+    // makeDiv(i);  // создаю товар на странице
+
 }
+
+
 function makeDiv(i) {
     let newDiv = document.createElement('div');
     newDiv.className = 'cart__product';
@@ -87,12 +92,7 @@ function makeDiv(i) {
     newImg.className = 'cart__product-image';
     newImg.src = productImage[i].src;
 
-
-    // if (cartProductCount.textContent !== cartElement.count) {
-    //     cartProductCount.textContent = productQuantityValue[i].textContent;
-    // };
-
-    cartProducts.appendChild(newDiv);
-    newDiv.appendChild(newImg);
-    newDiv.appendChild(newCountDiv);
+    cartProducts.append(newDiv);
+    newDiv.append(newImg);
+    newDiv.append(newCountDiv);
 }
