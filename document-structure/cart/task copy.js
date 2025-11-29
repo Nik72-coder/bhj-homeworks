@@ -7,7 +7,7 @@ let productAdd = document.getElementsByClassName('product__add'); // кнопк�
 // let product = productAdd[0].closest('.product');
 // console.log(product);
 let cartProductCount = document.getElementsByClassName('cart__product-count');
-cartProductCount = cartProductCount[0];
+
 let productImage = document.getElementsByClassName('product__image'); // картинка товара для заказа
 
 
@@ -23,7 +23,7 @@ let cart = document.querySelector('.cart'); // Корзина с товарам�
 let cartElementCount = cart.querySelector('.cart__product-count');
 let cartProductArray = []; // массив товаров в корзине
 cartProductArray.push(cartProduct);
-cartProductCount.textContent = 'Корзина пуста';
+cartProductCount[0].textContent = 'Корзина пуста';
 
 for (let i = 0; i < minus.length; i++) {
     minus[i].addEventListener('click', () => {
@@ -61,7 +61,7 @@ for (let i = 0; i < productAdd.length; i++) {
                 cartProductArray.push(product);  // и включается в массив корзины
             } else {
                 foundItem = 0;
-                cartProductCount.textContent = productQuantityValue[i].textContent; // иначе меняется только количество товара
+                cartProductCount[i].textContent = productQuantityValue[i].textContent; // иначе меняется только количество товара
 
             }
         
