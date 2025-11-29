@@ -4,38 +4,31 @@ let productQuantityValue = document.getElementsByClassName('product__quantity-va
 
 let plus = document.getElementsByClassName('product__quantity-control_inc'); // кнопка увеличения товара
 let productAdd = document.getElementsByClassName('product__add'); // кнопка добавления товара в корзину
-
-
-let product = document.getElementsByClassName('product'); // HTMLCollection карточек товара
-let productTitle = document.getElementsByClassName('product__title'); // HTMLcollection наименований товара
-
-
+// let product = productAdd[0].closest('.product');
+// console.log(product);
 let cartProductCount = document.getElementsByClassName('cart__product-count');
-cartProductCount = cartProductCount[0];                  // индикатор количества товара в корзине
 
-let cartProductImage = document.getElementsByClassName('cart__product-image'); // картинка товара в корзине
-cartProductImage = cartProductImage[0];
 let productImage = document.getElementsByClassName('product__image'); // картинка товара для заказа
 
-
-let productId = [];                                            // массив артикулов товаров
-for (let i = 0; i < product.length; i++) {
-    productId.push(product[i].dataset.id);
-}
 
 let cartProduct = document.getElementsByClassName('cart__product'); // добавленный в корзину товар
 cartProduct = cartProduct[0];
 let cartProducts = document.getElementsByClassName('cart__products'); // добавленный в корзину товар
 cartProducts = cartProducts[0];
-// let cartProductObject = { name: 'товар', id: 1, src: '', count: 1 }; // объект товара в корзине
 
-let cartProductObjectArray = []; // массив товаров(объектов) в корзине
-cartProduct.textContent = 'Корзина пуста';
+
+let cart = document.querySelector('.cart'); // Корзина с товарами
+
+
+let cartElementCount = cart.querySelector('.cart__product-count');
+let cartProductArray = []; // массив товаров в корзине
+cartProductArray.push(cartProduct);
+cartProductCount[0].textContent = 'Корзина пуста';
 
 for (let i = 0; i < minus.length; i++) {
     minus[i].addEventListener('click', () => {
         let a = Number(productQuantityValue[i].textContent)
-        if (a > 0) {
+        if (a > 1) {
             productQuantityValue[i].textContent = Number(productQuantityValue[i].textContent) - 1;
         };
     });
@@ -45,77 +38,61 @@ for (let i = 0; i < plus.length; i++) {
         productQuantityValue[i].textContent = Number(productQuantityValue[i].textContent) + 1;
     });
 };
+let foundItem = 0;  // Переменная для определения, есть ли уже в корзине кликнутый товар
 for (let i = 0; i < productAdd.length; i++) {
+
     productAdd[i].addEventListener('click', () => {
-        cartProduct.remove();
-        if (cartProductObjectArray.length === 0) {
-            makeObject(i);
-        } else {
-            let cartProductId = cartProductObjectArray.find((cartProductObject) => {
-                cartProductObject.id = productId[i];
-                return console.log('cartProductObject.id - ', cartProductObject.id);
-
-            })
-            if (cartProductId !== -1) {
-                makeObject(i);
+        let product = productAdd[i].closest('.product'); // Нашел кликнутый товар
+        let productId = product.dataset.id; // Получил id кликнутого товара
+        
+            for (let j = 0; j < cartProductArray.length; j++) { // цикл для поиска кликнутого товара в корзине
+                console.log(productId);  // контролирую кликнутый товар
+                console.log(cartProductArray[j].dataset.id); // контролирую опрашиваемый товар в корзине при переборе
+                console.log(cartProductArray);  // контролирую состав корзины, включен ли предыдущий кликнутый товар в корзину
+                console.log(productId === cartProductArray[j].dataset.id); // контролирую условие в следующей строке
+                if (productId === cartProductArray[j].dataset.id) { // проверка наличия по id кликнутого товара в корзине
+                    console.log('j - ', j) // контролирую процесс перебора
+                    foundItem += 1; // в случае, если в корзине уже есть товар, foundItem становится равным 1, он может принимать значения 0 или 1
+                };
+            };
+            console.log('foundItem - ', foundItem);  // контролирую правильность определения программой наличия товара в корзине
+            if (foundItem === 0) { // если товара в корзине нет,
+                makeDiv(i);   // то он помещается в корзину,
+                cartProductArray.push(product);  // и включается в массив корзины
             } else {
-
+                foundItem = 0;
+                cartProductCount[i].textContent = productQuantityValue[i].textContent; // иначе меняется только количество товара
 
             }
+        
 
-            // {
-            //     if (cartProductObjectArray[j].id.includes(productId[i])) {
-            //         console.log('Товар есть в корзине - ', cartProductObjectArray[j].id.includes(productId[i]));
-            //         cartProductObjectArray[j].count = productQuantityValue[i].textContent;
-            //         continue;
-            //     } else {
-            //         console.log('Товар есть в корзине - ', cartProductObjectArray[j].id.includes(productId[i]));
-            //         makeObject(i);
+    }
+    )
 
+    // cartProductArray.push(product);  // Если корзина пуста заношу в нее кликнутый товар
+    // makeDiv(i);  // создаю товар на странице
 
-            //     }
-            // }
-        }
-
-        // makeDiv(i);
-    });
-};
-
-function makeObject(i) {
-    let cartProductObject = {};
-
-    cartProductObject.id = productId[i];
-    cartProductObject.src = productImage[i].src;
-    cartProductObject.name = productTitle[i].textContent;
-    cartProductObject.count = productQuantityValue[i].textContent;
-    cartProductObjectArray.push(cartProductObject);
-
-
-    console.log('Корзина - ', cartProductObjectArray);
 }
 
 
+function makeDiv(i) {
+    let newDiv = document.createElement('div');
+    newDiv.className = 'cart__product';
+    newDiv.src = cart.src;
 
 
-// function makeDiv(i) {
-//     let newDiv = document.createElement('div');
-//     newDiv.className = 'cart__product';
-//     newDiv.src = cartProductObjectArray[i].src;
-//     newDiv.textContent = cartProductObjectArray[i].name;
 
-//     let newcountDiv = document.createElement('div');
-//     newcountDiv.className = 'cart__product-count';
-//     newcountDiv.textContent = cartProductObjectArray[i].count;
 
-//     let newImg = document.createElement('img');
-//     newImg.className = 'cart__product-image';
-//     newImg.src = productImage[i].currentSrc;
+    let newCountDiv = document.createElement('div');
+    newCountDiv.className = 'cart__product-count';
+    newCountDiv.textContent = productQuantityValue[i].textContent;
 
-//     if (cartProductCount.textContent !== cartProductObjectArray[i].count) {
-//         cartProductCount.textContent = productQuantityValue[i].textContent;
-//     };
 
-//     cartProducts.appendChild(newDiv);
-//     newDiv.appendChild(newImg);
-//     newDiv.appendChild(newcountDiv);
-// }
+    let newImg = document.createElement('img');
+    newImg.className = 'cart__product-image';
+    newImg.src = productImage[i].src;
+
+    cartProducts.append(newDiv);
+    newDiv.append(newImg);
+    newDiv.append(newCountDiv);
+}
